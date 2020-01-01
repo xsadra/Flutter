@@ -11,8 +11,7 @@ void main() {
         ),
         body: Center(
           child: Image(
-            image: NetworkImage(
-                'https://sample-videos.com/img/Sample-jpg-image-100kb.jpg'),
+            image: AssetImage('images/sample.jpg'),
           ),
         ),
       ),
