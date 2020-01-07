@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(MagicBall());
@@ -12,7 +14,7 @@ class MagicBall extends StatelessWidget {
           title: Text('Ask me you question'),
           backgroundColor: Colors.red.shade900,
         ),
-        backgroundColor: Colors.red.shade300,
+        backgroundColor: Colors.red,
         body: MagicBallContext(),
       ),
     );
@@ -25,9 +27,29 @@ class MagicBallContext extends StatefulWidget {
 }
 
 class _MagicBallContextState extends State<MagicBallContext> {
+  int randomNumber = 1;
+
   @override
   Widget build(BuildContext context) {
-    return Row();
+    return Center(
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: FlatButton(
+              onPressed: () {
+                changeRandomNumber();
+              },
+              child: Image.asset('images/ball$randomNumber.png'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void changeRandomNumber() {
+    setState(() {
+      randomNumber = Random().nextInt(5) + 1;
+    });
   }
 }
-
