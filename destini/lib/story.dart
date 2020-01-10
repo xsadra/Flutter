@@ -3,5 +3,5 @@ class Story {
   String choiceOne;
   String choiceTwo;
 
-  Story(this.storyTitle, this.choiceOne, this.choiceTwo);
+  Story({this.storyTitle, this.choiceOne, this.choiceTwo});
 }
