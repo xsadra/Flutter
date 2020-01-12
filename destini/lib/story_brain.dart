@@ -1,7 +1,6 @@
 import 'story.dart';
 
 class StoryBrain {
-
   int _storyNumber = 0;
 
   List<Story> _storyData = [
@@ -36,40 +35,41 @@ class StoryBrain {
         choiceTwo: '')
   ];
 
- String getStory(){
-   return _storyData[_storyNumber].storyTitle;
- }
- String getChoiceOne(){
-   return _storyData[_storyNumber].choiceOne;
- }
- String getChoiceTwo(){
-   return _storyData[_storyNumber].choiceTwo;
- }
+  String getStory() {
+    return _storyData[_storyNumber].storyTitle;
+  }
 
- void nextStory(int choiceNumber){
-   if (choiceNumber == 1 && _storyNumber == 0) {
-     _storyNumber = 2;
-   } else if (choiceNumber == 2 && _storyNumber == 0) {
-     _storyNumber = 1;
-   } else if (choiceNumber == 1 && _storyNumber == 1) {
-     _storyNumber = 2;
-   } else if (choiceNumber == 2 && _storyNumber == 1) {
-     _storyNumber = 3;
-   } else if (choiceNumber == 1 && _storyNumber == 2) {
-     _storyNumber = 5;
-   } else if (choiceNumber == 2 && _storyNumber == 2) {
-     _storyNumber = 4;
-   }else if(_storyNumber == 3 || _storyNumber == 4 || _storyNumber == 5){
-       restart();
-   }
- }
+  String getChoiceOne() {
+    return _storyData[_storyNumber].choiceOne;
+  }
 
- void restart(){
-   _storyNumber = 0;
- }
+  String getChoiceTwo() {
+    return _storyData[_storyNumber].choiceTwo;
+  }
+
+  void nextStory(int choiceNumber) {
+    if (choiceNumber == 1 && _storyNumber == 0) {
+      _storyNumber = 2;
+    } else if (choiceNumber == 2 && _storyNumber == 0) {
+      _storyNumber = 1;
+    } else if (choiceNumber == 1 && _storyNumber == 1) {
+      _storyNumber = 2;
+    } else if (choiceNumber == 2 && _storyNumber == 1) {
+      _storyNumber = 3;
+    } else if (choiceNumber == 1 && _storyNumber == 2) {
+      _storyNumber = 5;
+    } else if (choiceNumber == 2 && _storyNumber == 2) {
+      _storyNumber = 4;
+    } else if (_storyNumber == 3 || _storyNumber == 4 || _storyNumber == 5) {
+      restart();
+    }
+  }
+
+  void restart() {
+    _storyNumber = 0;
+  }
+
+  bool buttonShouldBeVisible() {
+    return _storyNumber == 0 || _storyNumber == 1 || _storyNumber == 2;
+  }
 }
-
-//TODO: Step 25 - Change the storyNumber property into a private property so that only story_brain.dart has access to it. You can do this by right clicking on the name (storyNumber) and selecting Refactor -> Rename to make the change across all the places where it's used.
-
-
-//TODO: Step 27 - Create a method called buttonShouldBeVisible() which checks to see if storyNumber is 0 or 1 or 2 (when both buttons should show choices) and return true if that is the case, else it should return false.
