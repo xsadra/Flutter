@@ -2,7 +2,7 @@ import 'story.dart';
 
 class StoryBrain {
 
-  int storyNumber = 0;
+  int _storyNumber = 0;
 
   List<Story> _storyData = [
     Story(
@@ -37,35 +37,35 @@ class StoryBrain {
   ];
 
  String getStory(){
-   return _storyData[storyNumber].storyTitle;
+   return _storyData[_storyNumber].storyTitle;
  }
  String getChoiceOne(){
-   return _storyData[storyNumber].choiceOne;
+   return _storyData[_storyNumber].choiceOne;
  }
  String getChoiceTwo(){
-   return _storyData[storyNumber].choiceTwo;
+   return _storyData[_storyNumber].choiceTwo;
  }
 
  void nextStory(int choiceNumber){
-   if (choiceNumber == 1 && storyNumber == 0) {
-     storyNumber = 2;
-   } else if (choiceNumber == 2 && storyNumber == 0) {
-     storyNumber = 1;
-   } else if (choiceNumber == 1 && storyNumber == 1) {
-     storyNumber = 2;
-   } else if (choiceNumber == 2 && storyNumber == 1) {
-     storyNumber = 3;
-   } else if (choiceNumber == 1 && storyNumber == 2) {
-     storyNumber = 5;
-   } else if (choiceNumber == 2 && storyNumber == 2) {
-     storyNumber = 4;
-   }else if(storyNumber == 3 || storyNumber == 4 || storyNumber == 5){
+   if (choiceNumber == 1 && _storyNumber == 0) {
+     _storyNumber = 2;
+   } else if (choiceNumber == 2 && _storyNumber == 0) {
+     _storyNumber = 1;
+   } else if (choiceNumber == 1 && _storyNumber == 1) {
+     _storyNumber = 2;
+   } else if (choiceNumber == 2 && _storyNumber == 1) {
+     _storyNumber = 3;
+   } else if (choiceNumber == 1 && _storyNumber == 2) {
+     _storyNumber = 5;
+   } else if (choiceNumber == 2 && _storyNumber == 2) {
+     _storyNumber = 4;
+   }else if(_storyNumber == 3 || _storyNumber == 4 || _storyNumber == 5){
        restart();
    }
  }
 
  void restart(){
-   storyNumber = 0;
+   _storyNumber = 0;
  }
 }
 
