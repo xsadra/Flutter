@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'reusable_card.dart';
+import 'icon_content.dart';
 
 const kActiveCardColor = Color(0xFF1D1E33);
 const kBottomContainerColor = Color(0xFFEB1555);
@@ -23,12 +26,14 @@ class _InputPageState extends State<InputPage> {
               children: <Widget>[
                 Expanded(
                   child: ReusableCard(
-                    backColor: kActiveCardColor,
+                    cardBackColor: kActiveCardColor,
+                    cardChild: IconContent(label: 'MAIL',icon: FontAwesomeIcons.mars,),
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
-                    backColor: kActiveCardColor,
+                    cardBackColor: kActiveCardColor,
+                    cardChild: IconContent(label: 'FEMAIL',icon: FontAwesomeIcons.venus,),
                   ),
                 ),
               ],
@@ -36,7 +41,7 @@ class _InputPageState extends State<InputPage> {
           ),
           Expanded(
             child: ReusableCard(
-              backColor: kActiveCardColor,
+              cardBackColor: kActiveCardColor,
             ),
           ),
           Expanded(
@@ -44,12 +49,12 @@ class _InputPageState extends State<InputPage> {
               children: <Widget>[
                 Expanded(
                   child: ReusableCard(
-                    backColor: kActiveCardColor,
+                    cardBackColor: kActiveCardColor,
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
-                    backColor: kActiveCardColor,
+                    cardBackColor: kActiveCardColor,
                   ),
                 ),
               ],
@@ -67,19 +72,3 @@ class _InputPageState extends State<InputPage> {
   }
 }
 
-class ReusableCard extends StatelessWidget {
-  final Color backColor;
-
-  ReusableCard({@required this.backColor});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        color: backColor,
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-    );
-  }
-}
