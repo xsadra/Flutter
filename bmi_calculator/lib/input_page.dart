@@ -1,19 +1,15 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'reusable_card.dart';
+
 import 'icon_content.dart';
+import 'reusable_card.dart';
 
 const kActiveCardColor = Color(0xFF1D1E33);
 const kInactiveCardColor = Color(0xFF111328);
 const kBottomContainerColor = Color(0xFFEB1555);
 const kBottomContainerHeight = 80.0;
 
-enum Gender{
-  male,
-  female
-}
-
+enum Gender { male, female }
 
 class InputPage extends StatefulWidget {
   @override
@@ -21,7 +17,6 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-
   Gender selectedGender;
 
   @override
@@ -36,28 +31,34 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: GestureDetector(
-                    onTap: (){
+                  child: ReusableCard(
+                    onPress: () {
                       setState(() {
                         selectedGender = Gender.male;
                       });
                     },
-                    child: ReusableCard(
-                      cardBackColor: selectedGender == Gender.male ? kActiveCardColor : kInactiveCardColor,
-                      cardChild: IconContent(label: 'MAIL',icon: FontAwesomeIcons.mars,),
+                    cardBackColor: selectedGender == Gender.male
+                        ? kActiveCardColor
+                        : kInactiveCardColor,
+                    cardChild: IconContent(
+                      label: 'MAIL',
+                      icon: FontAwesomeIcons.mars,
                     ),
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: (){
+                  child: ReusableCard(
+                    onPress: () {
                       setState(() {
                         selectedGender = Gender.female;
                       });
                     },
-                    child: ReusableCard(
-                      cardBackColor: selectedGender == Gender.female ? kActiveCardColor : kInactiveCardColor,
-                      cardChild: IconContent(label: 'FEMAIL',icon: FontAwesomeIcons.venus,),
+                    cardBackColor: selectedGender == Gender.female
+                        ? kActiveCardColor
+                        : kInactiveCardColor,
+                    cardChild: IconContent(
+                      label: 'FEMAIL',
+                      icon: FontAwesomeIcons.venus,
                     ),
                   ),
                 ),
@@ -96,4 +97,3 @@ class _InputPageState extends State<InputPage> {
     );
   }
 }
-
