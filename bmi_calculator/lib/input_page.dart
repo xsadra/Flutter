@@ -15,6 +15,7 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
   int height = 168;
+  int weight = 66;
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +81,7 @@ class _InputPageState extends State<InputPage> {
                     children: <Widget>[
                       Text(
                         height.toString(),
-                        style: kHeightNumberTextStyle,
+                        style: kNumberTextStyle,
                       ),
                       SizedBox(
                         width: 3.0,
@@ -95,7 +96,6 @@ class _InputPageState extends State<InputPage> {
                     value: height.toDouble(),
                     min: 120.0,
                     max: 220.0,
-
                     onChanged: (newHeight) {
                       setState(() {
                         height = newHeight.toInt();
@@ -112,6 +112,47 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ReusableCard(
                     cardBackColor: kActiveCardColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'WEIGHT',
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          weight.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPress: () {
+                                setState(() {
+                                  if (weight > 35) {
+                                     weight--;
+                                  }
+                                });
+                              },
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.plus,
+                              onPress: () {
+                                setState(() {
+                                  if (weight <= 220) {
+                                    weight++;
+                                  }
+                                });
+                              },
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(
@@ -130,6 +171,28 @@ class _InputPageState extends State<InputPage> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class RoundIconButton extends StatelessWidget {
+  final Function onPress;
+  final IconData icon;
+
+  const RoundIconButton({Key key, this.onPress, @required this.icon}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      elevation: 6.0,
+      shape: CircleBorder(),
+      fillColor: Color(0xFF4C4F5E),
+      constraints: BoxConstraints.tightFor(
+        height: 48.0,
+        width: 48.0,
+      ),
+      child: Icon(icon),
+      onPressed: onPress,
     );
   }
 }
