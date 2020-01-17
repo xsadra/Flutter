@@ -20,3 +20,12 @@ flutter:
   uses-material-design: true
   assets:
     - images/
+
+  fonts:
+    - family: FjallaOne
+      fonts:
+        - asset: fonts/FjallaOne-Regular.ttf
+
+    - family: WorkSans
+      fonts:
+        - asset: fonts/WorkSans-Regular.ttf
