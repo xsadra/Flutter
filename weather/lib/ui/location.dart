@@ -75,14 +75,14 @@ class _LocationUiState extends State<LocationUi> {
                     ],
                   ),
                   Text(
-                    'Condition',
+                    'Description',
                     style: kConditionTextStyle
                   ),
                 ],
               ),
               Center(
                 child: Text(
-                  'Description text',
+                  'Message text',
                   style: kDescriptionTextStyle,
                 ),
               ),
