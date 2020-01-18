@@ -64,9 +64,7 @@ class _LocationUiState extends State<LocationUi> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(
-                        '☀️',
-                        style: kTempTextStyle,
+                      Image.asset('icons/02d.png',
                       ),
                       Text(
                         '32°',
