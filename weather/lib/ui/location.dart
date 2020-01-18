@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather/constants/constants.dart';
 
 class LocationUi extends StatefulWidget {
   @override
@@ -54,10 +55,7 @@ class _LocationUiState extends State<LocationUi> {
                   ),
                   Text(
                     'Location',
-                    style: TextStyle(
-                      fontSize: 22.0,
-                      fontFamily: 'WorkSans',
-                    ),
+                    style: kLocationTextStyle
                   ),
                 ],
               ),
@@ -68,32 +66,24 @@ class _LocationUiState extends State<LocationUi> {
                     children: <Widget>[
                       Text(
                         '☀️',
-                        style: TextStyle(
-                          fontSize: 70.0,
-                        ),
+                        style: kTempTextStyle,
                       ),
                       Text(
                         '32°',
-                        style: TextStyle(
-                          fontFamily: 'WorkSans',
-                          fontSize: 70.0,
-                        ),
+                        style: kTempTextStyle
                       ),
                     ],
                   ),
                   Text(
                     'Condition',
-                    style: TextStyle(
-                      fontSize: 30.0,
-                      fontFamily: 'WorkSans',
-                    ),
+                    style: kConditionTextStyle
                   ),
                 ],
               ),
               Center(
                 child: Text(
                   'Description text',
-                  style: TextStyle(fontSize: 22.0),
+                  style: kDescriptionTextStyle,
                 ),
               ),
               SizedBox(),

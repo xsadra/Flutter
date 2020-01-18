@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:weather/constants/constants.dart';
 import 'package:weather/services/location.dart';
 import 'package:weather/services/networking.dart';
 import 'package:weather/ui/location.dart';
-
-const apiKey = '2281d34946a39d83f84215117c5ef424';
 
 class Loading extends StatefulWidget {
   @override
@@ -21,14 +20,13 @@ class _LoadingState extends State<Loading> {
     longitude = location.longitude;
 
     String url =
-        'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey&units=metric';
-    print(url);
+        '$kCurrentWeatherDataUrl?lat=$latitude&lon=$longitude&appid=$kApiKey&units=metric';
 
     NetworkHelper helper = NetworkHelper(url: url);
 
     var weatherData = await helper.getData();
 
-    Navigator.push(context, MaterialPageRoute(builder: (context){
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
       return LocationUi();
     }));
 
