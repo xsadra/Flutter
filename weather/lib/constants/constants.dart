@@ -18,6 +18,11 @@ const kConditionTextStyle = TextStyle(
   fontFamily: 'WorkSans',
 );
 
+const kConditionDetailTextStyle = TextStyle(
+  fontSize: 18.0,
+  fontFamily: 'WorkSans',
+);
+
 const kDescriptionTextStyle = TextStyle(
   fontSize: 22.0,
 );

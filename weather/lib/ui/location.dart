@@ -2,11 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:weather/constants/constants.dart';
 
 class LocationUi extends StatefulWidget {
+  final locationWeather;
+
+  const LocationUi({Key key, @required this.locationWeather}) : super(key: key);
+
   @override
   _LocationUiState createState() => _LocationUiState();
 }
 
 class _LocationUiState extends State<LocationUi> {
+  String city;
+  int temperature;
+  String description;
+  String icon;
+  int feelsLike;
+  int tempMin;
+  int tempMax;
+
+  @override
+  void initState() {
+    super.initState();
+    updateUI(widget.locationWeather);
+  }
+
+  void updateUI(weatherData) {
+    city = weatherData['name'];
+    String temperatureData = weatherData['main']['temp'].toString();
+    temperature = double.parse(temperatureData).round();
+    description = weatherData['weather'][0]['description'];
+    icon = weatherData['weather'][0]['icon'];
+    String feelsLikeData = weatherData['main']['feels_like'].toString();
+    feelsLike = double.parse(feelsLikeData).round();
+    String tempMinData = weatherData['main']['temp_min'].toString();
+    tempMin = double.parse(tempMinData).round();
+    String tempMaxData = weatherData['main']['temp_max'].toString();
+    tempMax = double.parse(tempMaxData).round();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,8 +86,8 @@ class _LocationUiState extends State<LocationUi> {
                     size: 20.0,
                   ),
                   Text(
-                    'Location',
-                    style: kLocationTextStyle
+                    city,
+                    style: kLocationTextStyle,
                   ),
                 ],
               ),
@@ -64,17 +96,29 @@ class _LocationUiState extends State<LocationUi> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Image.asset('icons/02d.png',
+                      Image.asset(
+                        'icons/$icon.png',
+                        width: 56.0,
+                        height: 56.0,
                       ),
                       Text(
-                        '32°',
-                        style: kTempTextStyle
+                        '$temperature°',
+                        style: kTempTextStyle,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        '$tempMax°/$tempMin° Feels like $feelsLike°',
+                        style: kConditionDetailTextStyle,
                       ),
                     ],
                   ),
                   Text(
-                    'Description',
-                    style: kConditionTextStyle
+                    description,
+                    style: kConditionTextStyle,
                   ),
                 ],
               ),
