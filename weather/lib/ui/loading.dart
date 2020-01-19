@@ -11,14 +11,11 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-  double latitude;
-  double longitude;
-
   void getLocationData() async {
     Location location = Location();
     await location.getCurrentLocation();
-    latitude = location.latitude;
-    longitude = location.longitude;
+    double latitude = location.latitude;
+    double longitude = location.longitude;
 
     String url =
         '$kCurrentWeatherDataUrl?lat=$latitude&lon=$longitude&appid=$kApiKey&units=metric';
@@ -28,12 +25,10 @@ class _LoadingState extends State<Loading> {
     var weatherData = await helper.getData();
 
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return LocationUi();
+      return LocationUi(
+        locationWeather: weatherData,
+      );
     }));
-
-//    double temperature = weatherData['main']['temp'];
-//    int temperatureId = weatherData['weather'][0]['id'];
-//    String city = weatherData['name'];
   }
 
   @override
