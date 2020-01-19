@@ -3,6 +3,19 @@ import 'package:weather/services/location.dart';
 import 'package:weather/services/networking.dart';
 
 class WeatherModel {
+  Future<dynamic> getCityWeather(String city) async {
+    Location location = Location();
+    await location.getCurrentLocation();
+    double latitude = location.latitude;
+    double longitude = location.longitude;
+
+    String url =
+        '$kCurrentWeatherDataUrl?q=$city&lat=$latitude&lon=$longitude&appid=$kApiKey&units=metric';
+
+    NetworkHelper helper = NetworkHelper(url: url);
+
+    return await helper.getData();
+  }
   Future<dynamic> getLocationWeather() async {
     Location location = Location();
     await location.getCurrentLocation();

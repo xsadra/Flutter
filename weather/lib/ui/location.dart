@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather/constants/constants.dart';
 import 'package:weather/services/weather.dart';
+import 'package:weather/ui/city.dart';
 
 class LocationUi extends StatefulWidget {
   final locationWeather;
@@ -93,7 +94,17 @@ class _LocationUiState extends State<LocationUi> {
                     ),
                   ),
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      var cityName = await Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return CityUi();
+                      }));
+                      print(cityName);
+                      if (cityName != null) {
+                        var weatherData = weather.getCityWeather(city);
+                        updateUI(weatherData);
+                      }
+                    },
                     child: Icon(
                       Icons.search,
                       size: 40.0,
