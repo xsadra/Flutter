@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather/constants/constants.dart';
+import 'package:weather/services/weather.dart';
 
 class LocationUi extends StatefulWidget {
   final locationWeather;
@@ -18,6 +19,9 @@ class _LocationUiState extends State<LocationUi> {
   int feelsLike;
   int tempMin;
   int tempMax;
+  String message;
+
+  WeatherModel weather = WeatherModel();
 
   @override
   void initState() {
@@ -26,17 +30,20 @@ class _LocationUiState extends State<LocationUi> {
   }
 
   void updateUI(weatherData) {
-    city = weatherData['name'];
-    String temperatureData = weatherData['main']['temp'].toString();
-    temperature = double.parse(temperatureData).round();
-    description = weatherData['weather'][0]['description'];
-    icon = weatherData['weather'][0]['icon'];
-    String feelsLikeData = weatherData['main']['feels_like'].toString();
-    feelsLike = double.parse(feelsLikeData).round();
-    String tempMinData = weatherData['main']['temp_min'].toString();
-    tempMin = double.parse(tempMinData).round();
-    String tempMaxData = weatherData['main']['temp_max'].toString();
-    tempMax = double.parse(tempMaxData).round();
+    setState(() {
+      city = weatherData['name'];
+      String temperatureData = weatherData['main']['temp'].toString();
+      temperature = double.parse(temperatureData).round();
+      description = weatherData['weather'][0]['description'];
+      icon = weatherData['weather'][0]['icon'];
+      String feelsLikeData = weatherData['main']['feels_like'].toString();
+      feelsLike = double.parse(feelsLikeData).round();
+      String tempMinData = weatherData['main']['temp_min'].toString();
+      tempMin = double.parse(tempMinData).round();
+      String tempMaxData = weatherData['main']['temp_max'].toString();
+      tempMax = double.parse(tempMaxData).round();
+      message = weather.getMessage(temperature);
+    });
   }
 
   @override
@@ -124,7 +131,7 @@ class _LocationUiState extends State<LocationUi> {
               ),
               Center(
                 child: Text(
-                  'Message text',
+                  message,
                   style: kDescriptionTextStyle,
                 ),
               ),
