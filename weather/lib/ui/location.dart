@@ -31,8 +31,6 @@ class _LocationUiState extends State<LocationUi> {
   }
 
   void updateUI(weatherData) {
-    print(weatherData);
-    print(city);
     if (weatherData == null) {
       city = '# ERROR';
       temperature = 0;
@@ -99,7 +97,6 @@ class _LocationUiState extends State<LocationUi> {
                           MaterialPageRoute(builder: (context) {
                         return CityUi();
                       }));
-                      print(cityName);
                       if (cityName != null) {
                         var weatherData = weather.getCityWeather(city);
                         updateUI(weatherData);
