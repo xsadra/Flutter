@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:weather/constants/constants.dart';
 import 'package:weather/services/location.dart';
 import 'package:weather/services/networking.dart';
@@ -43,6 +44,13 @@ class _LoadingState extends State<Loading> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Center(
+        child: SpinKitFadingCircle(
+          color: Colors.white70,
+          size: 120.0,
+        ),
+      ),
+    );
   }
 }
