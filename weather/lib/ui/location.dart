@@ -98,7 +98,7 @@ class _LocationUiState extends State<LocationUi> {
                         return CityUi();
                       }));
                       if (cityName != null) {
-                        var weatherData = weather.getCityWeather(city);
+                        var weatherData = await weather.getCityWeather(cityName);
                         updateUI(weatherData);
                       }
                     },
