@@ -30,6 +30,19 @@ class _LocationUiState extends State<LocationUi> {
   }
 
   void updateUI(weatherData) {
+    print(weatherData);
+    print(city);
+    if (weatherData == null) {
+      city = '# ERROR';
+      temperature = 0;
+      description = '';
+      icon = '01d';
+      feelsLike = 0;
+      tempMin = 0;
+      tempMax = 0;
+      message = 'There is some problem with Internet services.';
+      return;
+    }
     setState(() {
       city = weatherData['name'];
       String temperatureData = weatherData['main']['temp'].toString();
@@ -70,17 +83,20 @@ class _LocationUiState extends State<LocationUi> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      var weatherData = await weather.getLocationWeather();
+                      updateUI(weatherData);
+                    },
                     child: Icon(
-                      Icons.near_me,
-                      size: 50.0,
+                      Icons.my_location,
+                      size: 40.0,
                     ),
                   ),
                   FlatButton(
                     onPressed: () {},
                     child: Icon(
-                      Icons.location_city,
-                      size: 50.0,
+                      Icons.search,
+                      size: 40.0,
                     ),
                   ),
                 ],
