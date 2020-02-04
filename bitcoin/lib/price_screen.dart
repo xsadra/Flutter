@@ -29,6 +29,7 @@ class _PriceScreenState extends State<PriceScreen> {
       onChanged: (value) {
         setState(() {
           selectedCurrency = value;
+          getData();
         });
       },
     );
@@ -46,6 +47,7 @@ class _PriceScreenState extends State<PriceScreen> {
       onSelectedItemChanged: (selectedIndex) {
         setState(() {
           selectedCurrency = currenciesList[selectedIndex];
+          getData();
         });
       },
       children: pickerItems,
@@ -71,7 +73,7 @@ class _PriceScreenState extends State<PriceScreen> {
   @override
   void initState() {
     super.initState();
-    //TODO: Call getData() when the screen loads up.
+    getData();
   }
 
   @override
