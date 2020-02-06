@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:flutter/material.dart';
 
 import 'login_screen.dart';
 import 'registration_screen.dart';
@@ -22,15 +22,14 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
     controller =
         AnimationController(duration: Duration(seconds: 1), vsync: this);
-
     animation = ColorTween(begin: Colors.blueGrey, end: Colors.white)
         .animate(controller);
-
     controller.forward();
     controller.addListener(() {
       setState(() {});
     });
   }
+
   @override
   void dispose() {
     controller.dispose();
