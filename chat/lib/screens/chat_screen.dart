@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flash_chat/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:time_formatter/time_formatter.dart';
 
 final _firestore = Firestore.instance;
 FirebaseUser loggedInUser;
@@ -83,6 +84,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       _firestore.collection('messages').add({
                         'sender': loggedInUser.email,
                         'text': messageText,
+                        'time': Timestamp.now().seconds,
                       });
                     },
                     child: Text(
@@ -103,10 +105,15 @@ class _ChatScreenState extends State<ChatScreen> {
 class MessageBubble extends StatelessWidget {
   final String text;
   final String sender;
+  final String time;
   final bool isMe;
 
   const MessageBubble(
-      {Key key, @required this.text, @required this.sender, this.isMe})
+      {Key key,
+      @required this.text,
+      @required this.sender,
+      this.isMe,
+      this.time})
       : super(key: key);
 
   @override
@@ -145,9 +152,11 @@ class MessageBubble extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 5.0,),
+          SizedBox(
+            height: 5.0,
+          ),
           Text(
-            sender,
+            '$sender - $time',
             style: TextStyle(
               color: Colors.blueGrey,
               fontSize: 12.0,
@@ -163,7 +172,7 @@ class MessageStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: _firestore.collection('messages').snapshots(),
+      stream: _firestore.collection('messages').orderBy('time').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Column(
@@ -183,13 +192,18 @@ class MessageStream extends StatelessWidget {
         }
         List<MessageBubble> messageBubbles = [];
         final messages = snapshot.data.documents.reversed;
-        for (var message in messages) {print(message.data);
+        for (var message in messages) {
           final messageText = message.data['text'];
           final messageSender = message.data['sender'];
+          final int messageTimeStamp = message.data['time'];
+          String time = formatTime(messageTimeStamp * 1000);
+
+          final messageTime = time;
           final currentUser = loggedInUser.email;
           final messageBubble = MessageBubble(
             text: messageText,
             sender: messageSender,
+            time: messageTime,
             isMe: currentUser == messageSender,
           );
           messageBubbles.add(messageBubble);
