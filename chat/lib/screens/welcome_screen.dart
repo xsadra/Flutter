@@ -30,6 +30,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       setState(() {});
     });
   }
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
