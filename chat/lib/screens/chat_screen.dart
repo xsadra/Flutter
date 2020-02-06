@@ -67,7 +67,9 @@ class _ChatScreenState extends State<ChatScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      SizedBox(height: 200.0,),
+                      SizedBox(
+                        height: 200.0,
+                      ),
                       Text(
                         'no message yet...',
                         style: TextStyle(color: Colors.grey),
@@ -76,16 +78,23 @@ class _ChatScreenState extends State<ChatScreen> {
                     ],
                   );
                 }
-                List<Text> messageWidgets = [];
+                List<MessageBubble> messageBubbles = [];
                 final messages = snapshot.data.documents;
                 for (var message in messages) {
                   final messageText = message.data['text'];
                   final messageSender = message.data['sender'];
-                  final messageWidget = Text('$messageText -> $messageSender');
-                  messageWidgets.add(messageWidget);
+                  final messageBubble =
+                      MessageBubble(text: messageText, sender: messageSender);
+                  messageBubbles.add(messageBubble);
                 }
-                return Column(
-                  children: messageWidgets,
+                return Expanded(
+                  child: ListView(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 10.0,
+                      vertical: 20.0,
+                    ),
+                    children: messageBubbles,
+                  ),
                 );
               },
             ),
@@ -119,6 +128,45 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class MessageBubble extends StatelessWidget {
+  final String text;
+  final String sender;
+
+  const MessageBubble({Key key, @required this.text, @required this.sender})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: <Widget>[
+          Material(
+            elevation: 5.0,
+            borderRadius: BorderRadius.circular(18.0),
+            color: Colors.green.shade600,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 20.0,),
+              child: Text(
+                text,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+          Text(sender,style: TextStyle(
+            color: Colors.blueGrey,
+            fontSize: 12.0,
+          ),)
+        ],
       ),
     );
   }
