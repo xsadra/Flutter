@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todoey/constants/constants.dart';
+import 'package:todoey/models/task_data.dart';
 
 class AddTaskScreen extends StatelessWidget {
   @override
@@ -29,6 +31,9 @@ class AddTaskScreen extends StatelessWidget {
             TextField(
               autofocus: true,
               textAlign: TextAlign.center,
+              onChanged: (newValue) {
+                Provider.of<TaskData>(context,listen: false).tempValue = newValue;
+              },
             ),
             SizedBox(
               height: 10,
@@ -43,6 +48,11 @@ class AddTaskScreen extends StatelessWidget {
                   fontSize: 20,
                 ),
               ),
+              onPressed: () {
+                String newTaskTitle = Provider.of<TaskData>(context, listen: false).tempValue;
+                Provider.of<TaskData>(context, listen: false).addTask(newTaskTitle);
+                Navigator.pop(context);
+              },
             ),
           ],
         ),
