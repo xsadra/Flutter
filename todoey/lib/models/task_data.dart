@@ -6,14 +6,16 @@ import 'package:todoey/models/task.dart';
 class TaskData extends ChangeNotifier {
   String tempValue;
 
-  List<Task> tasks = [
+  List<Task> _tasks = [
     Task(name: 'first task'),
     Task(name: 'second task'),
     Task(name: 'third task'),
   ];
 
-  int get taskCount{
-    return tasks.length;
+  UnmodifiableListView<Task> get tasks => UnmodifiableListView(_tasks);
+
+  int get taskCount {
+    return _tasks.length;
   }
 
   void addTask(String newTaskTitle) {
