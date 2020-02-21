@@ -41,7 +41,7 @@ class TasksScreen extends StatelessWidget {
                     CircleAvatar(
                       child: Icon(
                         Icons.list,
-                        size: 30,
+                        size: 40,
                         color: kMainColor,
                       ),
                       radius: 30,
