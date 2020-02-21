@@ -39,7 +39,6 @@ class AddTaskScreen extends StatelessWidget {
               height: 10,
             ),
             FlatButton(
-              onPressed: () {},
               color: kMainColor,
               child: Text(
                 'Add',
