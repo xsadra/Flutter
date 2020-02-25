@@ -23,15 +23,19 @@ class TaskData extends ChangeNotifier {
   void addTask(String newTaskTitle) {
     final newTask = Task(name: newTaskTitle);
     _tasks.add(newTask);
+    _saveTasks();
     notifyListeners();
   }
 
-  void updateTask(Task task){
+  void updateTask(Task task) {
     task.toggleDone();
+    _saveTasks();
     notifyListeners();
   }
-  void deleteTask(Task task){
+
+  void deleteTask(Task task) {
     _tasks.remove(task);
+    _saveTasks();
     notifyListeners();
   }
 
