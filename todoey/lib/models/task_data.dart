@@ -7,11 +7,12 @@ import 'package:todoey/models/task.dart';
 class TaskData extends ChangeNotifier {
   String tempValue;
 
-  List<Task> _tasks = [
-    Task(name: 'first task'),
-    Task(name: 'second task'),
-    Task(name: 'third task'),
-  ];
+
+  TaskData(){
+    loadTasks();
+  }
+
+  List<Task> _tasks =  [];
 
   UnmodifiableListView<Task> get tasks => UnmodifiableListView(_tasks);
 
